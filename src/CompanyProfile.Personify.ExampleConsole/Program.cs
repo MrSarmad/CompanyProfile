@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
@@ -10,29 +11,36 @@ using System.Xml.Serialization;
  
 namespace CompanyProfile.Personify.ExampleConsole
 {
-    class Program
+    /// <summary>
+    /// a simple program to test out ideas for how to get PSFY data using some generic components.
+    /// </summary>
+    internal class Program
     {
-        private static readonly string psfyBase = "https://asi-prsw-02.uat-asicentral.com/PersonifyDataServices/PersonifyDataASI.svc/GetStoredProcedureDataXML";
-        private static readonly string psfyUser = "webuser";
-        private static readonly string psfyPass = "webuser2013";
-        static async Task Main(string[] args)
-        {
+        private readonly static string _psfyBase = "https://asi-prsw-02.uat-asicentral.com/PersonifyDataServices/PersonifyDataASI.svc/GetStoredProcedureDataXML";
+        private readonly static string _psfyUser = "webuser";
+        private readonly static string _psfyPass = "webuser2013";
 
+        private static async Task Main(string[] args)
+        {
             var asiNum = "33020";
 
             var result = await GetGeneralInfo(asiNum);
-
+            DisplayObject(result); 
 
             var addys = await GetAddressInfo(asiNum);
+            DisplayObject(addys);
 
-            //
             //var phones = await GetPhoneInfo(asiNum);
-            //phones.Dump();
-
-
+            //Console.WriteLine(phones); 
         }
 
-        static async Task<CompanyGeneralInfo> GetGeneralInfo(string asiNumber)
+        private static void DisplayObject<T>(T obj) where T: class
+        {
+            var serializedResult = JsonConvert.SerializeObject(obj);
+            Console.WriteLine(serializedResult);
+        }
+
+        private static async Task<CompanyGeneralInfo> GetGeneralInfo(string asiNumber)
         {
             var procName = "USR_CPI_General_Select";
             var procParams = new Dictionary<string, string>();
@@ -49,12 +57,12 @@ namespace CompanyProfile.Personify.ExampleConsole
             return results.Table;
         }
 
-        static string GetCurrentUserName()
+        private static string GetCurrentUserName()
         {
             return "CURWILER"; //todo: how should we get this? Need to ask PSFY team
         }
 
-        static async Task<object> GetAddressInfo(string asiNumber)
+        private static async Task<object> GetAddressInfo(string asiNumber)
         {
             var procName = "USR_CPI_Address_Select";
             var procParams = new Dictionary<string, string>();
@@ -74,7 +82,8 @@ namespace CompanyProfile.Personify.ExampleConsole
             return results;
 
         }
-        static StoredProcedureRequest GetProcRequest(string procName, Dictionary<string, string> procParams)
+
+        private static StoredProcedureRequest GetProcRequest(string procName, Dictionary<string, string> procParams)
         {
             var req = new StoredProcedureRequest
             {
@@ -102,16 +111,17 @@ namespace CompanyProfile.Personify.ExampleConsole
 
             return req;
         }
-        static async Task<T> MakeRequest<T>(StoredProcedureRequest req) where T : class
+
+        private static async Task<T> MakeRequest<T>(StoredProcedureRequest req) where T : class
         {
             using var httpClient = new HttpClient();//todo: see company insights on IOC implementation for this
-            httpClient.BaseAddress = new Uri(psfyBase);
+            httpClient.BaseAddress = new Uri(_psfyBase);
             httpClient.DefaultRequestHeaders.Clear();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic",
-                            Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes($"{psfyUser}:{psfyPass}")));
+                            Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes($"{_psfyUser}:{_psfyPass}")));
 
             var xmlSvc = new XmlService();
-            var serializedXml = xmlSvc.Serialize<StoredProcedureRequest>(req);
+            var serializedXml = xmlSvc.Serialize(req);
 
             var psfyPostResponse = await httpClient.PostAsync("", new StringContent(serializedXml, Encoding.UTF8, "text/xml"));
 
@@ -139,19 +149,18 @@ namespace CompanyProfile.Personify.ExampleConsole
                 if (!string.IsNullOrWhiteSpace(dataNode))
                 {
                     //deserialize the datanode into provided type
-                    using (TextReader reader = new StringReader(dataNode))
-                    {
-                        var dataNodeSerializer = new XmlSerializer(typeof(T), new XmlRootAttribute("NewDataSet"));
-                        var datanodeObj = dataNodeSerializer.Deserialize(reader);
-                        if (datanodeObj is T)
-                            return (T)datanodeObj;
-                    }
+                    using TextReader reader = new StringReader(dataNode);
+                    var dataNodeSerializer = new XmlSerializer(typeof(T), new XmlRootAttribute("NewDataSet"));
+                    var datanodeObj = dataNodeSerializer.Deserialize(reader);
+                    if (datanodeObj is T)
+                        return (T)datanodeObj;
                 }
             }
             catch (Exception ex)
             {
                 //log the exc
-                //"invalid XML data node"
+                DisplayObject(ex);
+                
                 return null;
             }
             return null;
@@ -161,15 +170,13 @@ namespace CompanyProfile.Personify.ExampleConsole
     {
         public string Serialize<TInput>(TInput objToSerialize) where TInput : class
         {
-            System.Xml.Serialization.XmlSerializer xsSubmit = new System.Xml.Serialization.XmlSerializer(typeof(TInput));
+            XmlSerializer xsSubmit = new XmlSerializer(typeof(TInput));
             var xml = string.Empty;
             using (var sww = new StringWriter())
             {
-                using (XmlWriter writer = XmlWriter.Create(sww))
-                {
-                    xsSubmit.Serialize(writer, objToSerialize);
-                    xml = sww.ToString();
-                }
+                using XmlWriter writer = XmlWriter.Create(sww);
+                xsSubmit.Serialize(writer, objToSerialize);
+                xml = sww.ToString();
             }
             return xml;
         }
@@ -181,24 +188,24 @@ namespace CompanyProfile.Personify.ExampleConsole
         //}
     }
 
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+    [Serializable()]
+    [System.ComponentModel.DesignerCategory("code")]
+    [XmlType(AnonymousType = true)]
+    [XmlRoot(Namespace = "", IsNullable = false)]
     public partial class StoredProcedureOutput
     {
         /// <remarks/>
         public string Data { get; set; }
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        [XmlElement(IsNullable = true)]
         public object operationResult { get; set; }
     }
     
     /// <remarks/>
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+    [Serializable()]
+    [System.ComponentModel.DesignerCategory("code")]
+    [XmlType(AnonymousType = true)]
+    [XmlRoot(Namespace = "", IsNullable = false)]
     public partial class StoredProcedureRequest
     {
         /// <remarks/>
@@ -211,14 +218,14 @@ namespace CompanyProfile.Personify.ExampleConsole
         public bool IsUDFScalar { get; set; }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlArrayItemAttribute("StoredProcedureParameter", IsNullable = false)]
+        [XmlArrayItem("StoredProcedureParameter", IsNullable = false)]
         public StoredProcedureRequestParameter[] SPParameterList { get; set; }
     }
 
     /// <remarks/>
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [Serializable()]
+    [System.ComponentModel.DesignerCategory("code")]
+    [XmlType(AnonymousType = true)]
     public partial class StoredProcedureRequestParameter
     {
         /// <remarks/>
@@ -233,23 +240,21 @@ namespace CompanyProfile.Personify.ExampleConsole
 
 
     /// <remarks/>
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    [System.Xml.Serialization.XmlRootAttribute(ElementName = "NewDataSet", Namespace = "", IsNullable = false)]
+    [Serializable()]
+    [System.ComponentModel.DesignerCategory("code")]
+    [XmlType(AnonymousType = true)]
+    [XmlRoot(ElementName = "NewDataSet", Namespace = "", IsNullable = false)]
     public partial class PsfyGeneralInfoContainer
     {
-        private CompanyGeneralInfo tableField;
-
         /// <remarks/>
         public CompanyGeneralInfo Table { get; set; }
     }
 
     /// <remarks/>
-    [System.SerializableAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    [System.Xml.Serialization.XmlRootAttribute(ElementName = "Table", Namespace = "", IsNullable = false)]
+    [Serializable()]
+    [System.ComponentModel.DesignerCategory("code")]
+    [XmlType(AnonymousType = true)]
+    [XmlRoot(ElementName = "Table", Namespace = "", IsNullable = false)]
     public partial class CompanyGeneralInfo
     {
         public object Business_Hours { get; set; }
