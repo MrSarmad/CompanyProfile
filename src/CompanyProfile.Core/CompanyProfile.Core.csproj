@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Nullable>enable</Nullable>
+    <LangVersion>9</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!--use this once you have published the package-->
+    <!--<PackageReference Include="ASI.Contracts.CompanyProfile" Version="1.0.0" />-->
+    <PackageReference Include="ASI.Sugar" Version="3.2.3" />
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="log4net" Version="2.0.12" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.Abstractions" Version="5.0.8" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection" Version="5.0.8" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+
+    <PackageReference Include="ASI.Services.Access" Version="1.1.0" />
+    <PackageReference Include="ASI.Services.Access.Search" Version="1.0.0" />
+    <PackageReference Include="ASI.Services.Search.Indexing" Version="1.7.5" />
+    <PackageReference Include="ASI.Services.Search.Models" Version="1.7.5" />
+    
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--use this when you haven't published contracts yet-->
+    <ProjectReference Include="..\ASI.Contracts.CompanyProfile\ASI.Contracts.CompanyProfile.csproj" />
+    <ProjectReference Include="..\CompanyProfile.Personify\CompanyProfile.Personify.csproj" />
+  </ItemGroup>
+  
+</Project>

@@ -1,0 +1,39 @@
+{
+  "ReverseProxy": {
+    "Clusters": {
+      "cluster1": {
+        "Metadata": {
+          "CustomHealth": "false"
+        },
+        "Destinations": {
+          "cluster1/destination1": {
+            "Address": "https://esp.asicentral.com/"
+          }
+        }
+      }
+    },
+    "Routes": [
+      {
+        "RouteId": "route1",
+        "ClusterId": "cluster1",
+        "Match": {
+          "Methods": [ "GET", "POST", "PUT" ],
+          "Hosts": [ "localhost" ],
+          "Path": "/api/orders/{*remainder}"
+        },
+        "Transforms": [
+          { "PathPattern": "/api/v1/orders/{remainder}" }
+        ]
+      },
+      {
+        "RouteId": "route2",
+        "ClusterId": "cluster1",
+        "Match": {
+          "Methods": [ "GET", "POST", "PUT" ],
+          "Hosts": [ "localhost" ],
+          "Path": "/api/v1/company/{*remainder}"
+        }
+      }
+    ]
+  }
+}

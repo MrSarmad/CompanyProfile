@@ -1,0 +1,36 @@
+{
+  "SecureHeadersConfiguration": {
+    "UseHsts": true,
+    "HstsConfiguration": {
+      "MaxAge": 63072000,
+      "IncludeSubDomains": true
+    },
+    "UseXFrameOptions": true,
+    "XFrameOptionsConfiguration": {
+      "OptionValue": "allowfrom",
+      "AllowFromDomain": "https://asicentral.com"
+    },
+    "UseXssProtection": true,
+    "XssConfiguration": {
+      "XssSetting": "oneBlock",
+      "ReportUri": "https://github.com/asi/ApplicationTemplate"
+    },
+    "UseXContentTypeOptions": true,
+    "UseContentSecurityPolicy": true,
+    "ContentSecurityPolicyConfiguration": {
+      "BlockAllMixedContent": true,
+      "UpgradeInsecureRequests": true
+    },
+    "UseExpectCt": true,
+    "ExpectCtConfiguration": {
+      "ReportUri": "https://foo.example/report",
+      "MaxAge": 86400,
+      "Enforce": false
+    },
+    "UseReferrerPolicy": true,
+    "ReferrerPolicyOption": "noReferrer",
+    "UsePermittedCrossDomainPolicy": true,
+    "XPermittedCrossDomainOptionValue": "none",
+    "RemovePoweredByHeader": true
+  }
+}

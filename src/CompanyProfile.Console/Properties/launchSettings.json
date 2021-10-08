@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "CompanyProfile.Console": {
+      "commandName": "Project"
+    }
+  }
+}

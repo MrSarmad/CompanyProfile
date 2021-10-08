@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <LangVersion>9</LangVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>ASI.Contracts.CompanyProfile</PackageId>
+    <RootNamespace>ASI.Contracts.CompanyProfile</RootNamespace>
+    <AssemblyName>ASI.Contracts.CompanyProfile</AssemblyName>
+    <Version>1.0.0</Version>
+    <Authors>ASI</Authors>
+    <Company>ASI</Company>
+    <Product>ASI Application Template</Product>
+    <PackageIconUrl />
+    <Description>
+      Sample contract package.
+    </Description>
+  </PropertyGroup>
+</Project>

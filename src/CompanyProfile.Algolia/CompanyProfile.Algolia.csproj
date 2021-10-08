@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Nullable>enable</Nullable>
+    <LangVersion>9</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ASI.Services.Algolia" Version="1.7.5" />
+    <PackageReference Include="ASI.Services.Algolia.Indexing" Version="1.7.5" />
+    <PackageReference Include="ASI.Services.Algolia.Indexing.Automapper" Version="1.7.5" />
+
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\CompanyProfile.Core\CompanyProfile.Core.csproj" />
+  </ItemGroup>
+
+</Project>

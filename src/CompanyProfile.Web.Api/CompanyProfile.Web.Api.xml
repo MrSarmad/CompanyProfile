@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CompanyProfile.Web.Api</name>
+    </assembly>
+    <members>
+        <member name="M:CompanyProfile.Web.Api.Controllers.MyEntityController.SearchAsync(ASI.Contracts.CompanyProfile.Search.SearchCriteriaView)">
+            <summary>
+            Search Endpoint
+            </summary>
+            <param name="searchCriteriaView"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CompanyProfile.Web.Api.Infrastructure.ConfigureAppExtentions.ConfigureSecureHeaders(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Configure Secure Header middleware per OWASP recommendations
+            </summary>
+        </member>
+        <member name="M:CompanyProfile.Web.Api.Infrastructure.ConfigureAppExtentions.ConfigureExceptionHandler(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Configure the API exception handler
+            </summary>
+        </member>
+        <member name="M:CompanyProfile.Web.Api.Infrastructure.ConfigureAppExtentions.ConfigureLogging(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Configure Logging
+            </summary>
+        </member>
+        <member name="T:CompanyProfile.Web.Api.Infrastructure.SwaggerExtensions">
+            <summary>
+            Swagger setup methods
+            </summary>
+        </member>
+        <member name="M:CompanyProfile.Web.Api.Infrastructure.SwaggerExtensions.ConfigureSwagger(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Configure the Swagger endpoints for this app
+            </summary>
+        </member>
+        <member name="M:CompanyProfile.Web.Api.Infrastructure.SwaggerExtensions.RegisterSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Register's swagger using ASI's standards
+            </summary>
+        </member>
+        <member name="M:CompanyProfile.Web.Api.DependencyInjection.AddWebApi(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            CompanyProfile registrations. This is where to register all objects needed by your code
+            </summary>
+        </member>
+        <member name="M:CompanyProfile.Web.Api.DependencyInjection.RegisterUser(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Register all things pertaining to the current user
+            </summary>
+        </member>
+        <member name="T:CompanyProfile.Web.Security.AccessCurrentUser">
+             <summary>
+             Serviecs that gives current user for purposes of ASI.Services.Access library for
+             security filtering on tenantid and ownerid
+            
+             Could be consolidated with IUserInformation or ITenantContext
+             </summary>
+        </member>
+        <member name="T:CompanyProfile.Web.Security.WebTenantContext">
+            <summary>
+            Example of how you could store a tenant id. This allows you to inject the current tenant
+            throughout the application. Security policy expects this in order to filter out
+            every object from being accessed across-tenant.
+            </summary>
+        </member>
+        <member name="P:CompanyProfile.Web.Security.WebTenantContext.TenantId">
+            <summary>
+            TenantId of the current user (assuming this is TENT-based app)
+            </summary>
+        </member>
+        <member name="T:CompanyProfile.Web.Security.WebUserInformation">
+            <summary>
+            Example of how you could retrieve the current user information
+            IUserInformation can be modified to store all info you need about
+            the current user and injected into services
+            </summary>
+        </member>
+        <member name="P:CompanyProfile.Web.Security.WebUserInformation.UserName">
+            <summary>
+            Username of the user authenticated via ASI Authentication
+            </summary>
+        </member>
+        <member name="M:WebApiTemplate.Core.Infrastructure.AsiWebApiExtensions.AddAsiWebApi(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Hosting.IHostEnvironment)">
+            <summary>
+            Standards for all ASI Web applications
+            </summary>
+        </member>
+        <member name="M:WebApiTemplate.Core.Infrastructure.AsiWebApiExtensions.AddAsiAuth(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Standards for using ASI's Authentication strategies
+            </summary>
+        </member>
+        <member name="T:WebApiTemplate.Core.Infrastructure.LoggingExtensions">
+            <summary>
+            Register's logging using ASI's standards
+            </summary>
+        </member>
+        <member name="M:WebApiTemplate.Core.Infrastructure.MicrosoftWebApiExtensions.AddMsApi(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Microsoft-specific registrations
+            </summary>
+        </member>
+    </members>
+</doc>
