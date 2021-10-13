@@ -8,6 +8,7 @@ using CompanyProfile.Algolia.Seeding;
 using CompanyProfile.Core.Models;
 using CompanyProfile.Core.Search.Models;
 using CompanyProfile.Core.Search.Providers;
+using CompanyProfile.Core.CompanyProfile;
 
 namespace CompanyProfile.Algolia.Startup
 {
@@ -24,6 +25,7 @@ namespace CompanyProfile.Algolia.Startup
             AddIndexOperationStrategies(services);
             RegisterIndexCreation(services);
             RegisterSeeding(services);
+            RegisterCompanyProfile(services);
         }
 
         private static void RegisterSearchProviders(IServiceCollection services)
@@ -49,6 +51,11 @@ namespace CompanyProfile.Algolia.Startup
             services.AddScoped<ISeeder, MyEntitySeeder>();
 
             services.AddScoped<SeederProvider>();
+        }
+
+        private static void RegisterCompanyProfile(IServiceCollection services)
+        {
+            services.AddScoped<ICompanyProfileService, CompanyProfileService>();
         }
     }
 }

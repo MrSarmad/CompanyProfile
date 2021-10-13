@@ -31,7 +31,7 @@ namespace CompanyProfile.Personify.ExampleConsole
             DisplayObject(addys);
 
             //var phones = await GetPhoneInfo(asiNum);
-            //Console.WriteLine(phones); 
+            Console.ReadLine(); 
         }
 
         private static void DisplayObject<T>(T obj) where T: class
