@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace ASI.Contracts.CompanyProfile.XMLModel
+namespace ASI.Contracts.CompanyProfile.CompanyProfile.XMLModel
 {
     [Serializable()]
     [System.ComponentModel.DesignerCategory("code")]

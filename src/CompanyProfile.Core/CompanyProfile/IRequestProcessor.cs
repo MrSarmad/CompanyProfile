@@ -1,4 +1,4 @@
-﻿using ASI.Contracts.CompanyProfile.XMLModel;
+﻿using ASI.Contracts.CompanyProfile.CompanyProfile.XMLModel;
 
 using System;
 using System.Collections.Generic;
