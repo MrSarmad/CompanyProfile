@@ -19,10 +19,17 @@ namespace CompanyProfile.Web.Api.Controllers
         }
 
         [HttpGet]
-        [Route("info")]
+        [Route("GeneralInfo")]
         public async void GetGeneralInfo(string asiNumber)
         {
             
+        }
+
+        [HttpGet]
+        [Route("AddressInfo")]
+        public async void GetAddressInfo(string asiNumber)
+        {
+
         }
     }
 }

@@ -10,5 +10,6 @@ namespace CompanyProfile.Core.CompanyProfile
     public interface ICompanyProfileService
     {
         Task<CompanyGeneralInfo> GetCompanyInfo(string asiNumber);
+        Task<CompanyGeneralInfo> GetAddressInfo(string asiNumber);
     }
 }

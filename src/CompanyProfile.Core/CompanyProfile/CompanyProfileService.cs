@@ -20,7 +20,16 @@ namespace CompanyProfile.Core.CompanyProfile
 
         public async Task<CompanyGeneralInfo> GetCompanyInfo(string asiNumber)
         {
-            IRequestProcessor processor = new GeneralRequestProcessor(asiNumber);
+            IRequestProcessor processor = new GeneralInfoRequestProcessor(asiNumber);
+            var request = processor.CreateRequest();
+            var pfyService = new PersonifyDataService(_httpClient);
+            var response = await pfyService.MakeRequest<string>(request);
+            return null;
+        }
+
+        public async Task<CompanyGeneralInfo> GetAddressInfo(string asiNumber)
+        {
+            IRequestProcessor processor = new AddressInfoRequestProcessor(asiNumber);
             var request = processor.CreateRequest();
             var pfyService = new PersonifyDataService(_httpClient);
             var response = await pfyService.MakeRequest<string>(request);
