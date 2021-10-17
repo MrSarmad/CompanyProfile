@@ -17,4 +17,8 @@
       Sample contract package.
     </Description>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Response\" />
+  </ItemGroup>
 </Project>

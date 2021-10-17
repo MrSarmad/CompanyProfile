@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="CompanyProfile\SPBuilders\AddressInfoRequestProcessor.cs" />
+    <Compile Remove="CompanyProfile\SPBuilders\GeneralInfoRequestProcessor.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <!--use this once you have published the package-->
     <!--<PackageReference Include="ASI.Contracts.CompanyProfile" Version="1.0.0" />-->
     <PackageReference Include="ASI.Sugar" Version="3.2.3" />
