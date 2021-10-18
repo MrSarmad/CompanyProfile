@@ -31,7 +31,7 @@ namespace CompanyProfile.Core.CompanyProfile
             SPName = ProceduresInfo.USR_CPI_General_Update_Number_Of_Employees.SPNAME;
             RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Number_Of_Employees.ip_usr_customer_number, Value = CompanyId, Direction = 1 });
             RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Number_Of_Employees.ip_Number_Of_Employees, Value = Number_Of_Employees, Direction = 1 });
-            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Number_Of_Employees.@ip_user_id, Value = UserId, Direction = 1 });
+            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Number_Of_Employees.ip_user_id, Value = UserId, Direction = 1 });
             return CreateRequest();
         }
 

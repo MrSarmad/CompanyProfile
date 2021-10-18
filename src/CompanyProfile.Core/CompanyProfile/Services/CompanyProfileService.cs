@@ -1,7 +1,4 @@
 ﻿using ASI.Contracts.CompanyProfile.CompanyProfile.XMLModel;
-
-using CompanyProfile.Core.CompanyProfile;
-
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -19,19 +16,19 @@ namespace CompanyProfile.Core.CompanyProfile
             _httpClient = new HttpClient();
         }        
 
-        public async Task<CompanyGeneralInfo> GetCompanyInfo(string asiNumber, string subCompanyId, string userId)
+        public async Task<CompanyGeneralInfo> GetCompanyInfo(string companyId, string userId)
         {
-            IProcedureRequest spRequestBuilder = new GeneralInfoProcedureRequest(asiNumber, subCompanyId, userId);         
+            IProcedureRequest spRequestBuilder = new GeneralInfoProcedureRequest(companyId, userId);         
             var pfyService = new PersonifyDataService(_httpClient);
-            var response = await pfyService.MakeRequest<string>(spRequestBuilder.CreateSelectProcedureRequest());
+            var response = await pfyService.MakeRequest(spRequestBuilder.CreateSelectProcedureRequest());
             return null;           
         }
 
-        public async Task<bool> UpdateAboutUs(string asiNumber, string aboutUs, string userId)
+        public async Task<bool> UpdateAboutUs(string companyId, string aboutUs, string userId)
         {
-            IProcedureRequest spRequestBuilder = new GeneralInfoAboutUsProcedureRequest(asiNumber, aboutUs, userId);
+            IProcedureRequest spRequestBuilder = new GeneralInfoAboutUsProcedureRequest(companyId, aboutUs, userId);
             var pfyService = new PersonifyDataService(_httpClient);
-            var response = await pfyService.MakeRequest<string>(spRequestBuilder.CreateUpdateProcedureRequest());
+            var response = await pfyService.MakeRequest(spRequestBuilder.CreateUpdateProcedureRequest());
             return true;           
         }
 
@@ -39,7 +36,7 @@ namespace CompanyProfile.Core.CompanyProfile
         {
             IProcedureRequest spRequestBuilder = new GeneralInfoBusinessHoursProcedureRequest(asiNumber, businessHours, userId);
             var pfyService = new PersonifyDataService(_httpClient);
-            var response = await pfyService.MakeRequest<string>(spRequestBuilder.CreateUpdateProcedureRequest());
+            var response = await pfyService.MakeRequest(spRequestBuilder.CreateUpdateProcedureRequest());
             return true;
         }
 
@@ -51,7 +48,7 @@ namespace CompanyProfile.Core.CompanyProfile
                 hispanic_owned, african_american_owned, native_american_owned, jewish_owned, disabled_owned, esop,
                 cert_available, small_disadvantage, lgbtq_owned, user_id);
             var pfyService = new PersonifyDataService(_httpClient);
-            var response = await pfyService.MakeRequest<string>(spRequestBuilder.CreateUpdateProcedureRequest());
+            var response = await pfyService.MakeRequest(spRequestBuilder.CreateUpdateProcedureRequest());
             return true;
         }
 
@@ -59,7 +56,7 @@ namespace CompanyProfile.Core.CompanyProfile
         {
             IProcedureRequest spRequestBuilder = new GeneralInfoNumberOfEmployeesProcedureRequest(asiNumber, Number_Of_Employees, userId);
             var pfyService = new PersonifyDataService(_httpClient);
-            var response = await pfyService.MakeRequest<string>(spRequestBuilder.CreateUpdateProcedureRequest());
+            var response = await pfyService.MakeRequest(spRequestBuilder.CreateUpdateProcedureRequest());
             return true;
         }
 
@@ -67,7 +64,7 @@ namespace CompanyProfile.Core.CompanyProfile
         {
             IProcedureRequest spRequestBuilder = new GeneralInfoYearEstablishedProcedureRequest(asiNumber, year_established, userId);
             var pfyService = new PersonifyDataService(_httpClient);
-            var response = await pfyService.MakeRequest<string>(spRequestBuilder.CreateUpdateProcedureRequest());
+            var response = await pfyService.MakeRequest(spRequestBuilder.CreateUpdateProcedureRequest());
             return true;
         }        
     }

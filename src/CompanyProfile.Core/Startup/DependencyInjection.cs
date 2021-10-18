@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using CompanyProfile.Personify;
+using CompanyProfile.Core.CompanyProfile;
 
 namespace CompanyProfile.Core.Startup
 {
@@ -18,16 +19,13 @@ namespace CompanyProfile.Core.Startup
         public static void AddCore(this IServiceCollection services)
         {
             services.AddAutoMapper(typeof(MyEntityProfile).Assembly);
-
             services.AddSingleton<IConfiguration, FileConfiguration>();
-
             services.AddScoped<ISecurityPolicy, TenantSecurityPolicy>();
             services.AddScoped<IMyEntityLoader, MyEntityLoader>();
             services.AddScoped<IMyEntityService, MyEntityService>();
-
             services.AddScoped<IAuditFieldFixer, AuditFieldFixer>();
-
             services.AddScoped<IApiAccess, ApiAccess>();
+            services.AddScoped<ICompanyProfileService, CompanyProfileService>();
         }
 
         /// <summary>

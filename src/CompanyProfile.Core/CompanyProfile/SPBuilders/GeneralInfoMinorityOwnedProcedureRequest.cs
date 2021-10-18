@@ -54,20 +54,20 @@ namespace CompanyProfile.Core.CompanyProfile
         public override StoredProcedureRequest CreateUpdateProcedureRequest()
         {
             SPName = ProceduresInfo.USR_CPI_General_Update_Minority_Owned.SPNAME;
-            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Minority_Owned.@ip_usr_customer_number, Value = CompanyId, Direction = 1 });
-            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Minority_Owned.@ip_female_owned, Value = FemaleOwned, Direction = 1 });
-            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Minority_Owned.@ip_veteran_owned, Value = VeteranOwned, Direction = 1 });
-            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Minority_Owned.@ip_asian_owned, Value = AsianOwned, Direction = 1 });
-            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Minority_Owned.@ip_hispanic_owned, Value = Hispanic_owned, Direction = 1 });
-            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Minority_Owned.@ip_african_american_owned, Value = African_american_owned, Direction = 1 });
-            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Minority_Owned.@ip_native_american_owned, Value = Native_american_owned, Direction = 1 });
-            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Minority_Owned.@ip_jewish_owned, Value = Jewish_owned, Direction = 1 });
-            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Minority_Owned.@ip_disabled_owned, Value = Disabled_owned, Direction = 1 });
-            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Minority_Owned.@ip_esop, Value = Esop, Direction = 1 });
-            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Minority_Owned.@ip_cert_available, Value = Cert_available, Direction = 1 });
-            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Minority_Owned.@ip_small_disadvantage, Value = Small_disadvantage, Direction = 1 });
-            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Minority_Owned.@ip_lgbtq_owned, Value = Lgbtq_owned, Direction = 1 });
-            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Minority_Owned.@ip_user_id, Value = UserId, Direction = 1 });
+            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Minority_Owned.ip_usr_customer_number, Value = CompanyId, Direction = 1 });
+            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Minority_Owned.ip_female_owned, Value = FemaleOwned, Direction = 1 });
+            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Minority_Owned.ip_veteran_owned, Value = VeteranOwned, Direction = 1 });
+            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Minority_Owned.ip_asian_owned, Value = AsianOwned, Direction = 1 });
+            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Minority_Owned.ip_hispanic_owned, Value = Hispanic_owned, Direction = 1 });
+            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Minority_Owned.ip_african_american_owned, Value = African_american_owned, Direction = 1 });
+            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Minority_Owned.ip_native_american_owned, Value = Native_american_owned, Direction = 1 });
+            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Minority_Owned.ip_jewish_owned, Value = Jewish_owned, Direction = 1 });
+            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Minority_Owned.ip_disabled_owned, Value = Disabled_owned, Direction = 1 });
+            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Minority_Owned.ip_esop, Value = Esop, Direction = 1 });
+            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Minority_Owned.ip_cert_available, Value = Cert_available, Direction = 1 });
+            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Minority_Owned.ip_small_disadvantage, Value = Small_disadvantage, Direction = 1 });
+            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Minority_Owned.ip_lgbtq_owned, Value = Lgbtq_owned, Direction = 1 });
+            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Minority_Owned.ip_user_id, Value = UserId, Direction = 1 });
             return CreateRequest();
         }
 

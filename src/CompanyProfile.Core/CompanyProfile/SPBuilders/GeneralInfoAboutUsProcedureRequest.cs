@@ -8,11 +8,13 @@ namespace CompanyProfile.Core.CompanyProfile
 {
     public class GeneralInfoAboutUsProcedureRequest : ProcedureRequestBase
     {
-        public GeneralInfoAboutUsProcedureRequest(string asiNumber, string subCompanyId, string userId)
+        public string AboutUsInfo { get; set; }
+        public GeneralInfoAboutUsProcedureRequest(string companyId, string aboutUsInfo, string userId)
         {
-            CompanyId = GetAsiNumber(asiNumber);
-            SubCompanyId = subCompanyId;
+            CompanyId = companyId;
             UserId = userId;
+            AboutUsInfo = aboutUsInfo;
+            RequestParams = new List<StoredProcedureRequestParameter>();
         }
 
         public override StoredProcedureRequest CreateSelectProcedureRequest()
@@ -29,8 +31,8 @@ namespace CompanyProfile.Core.CompanyProfile
         {
             SPName = ProceduresInfo.USR_CPI_General_Update_About_Us.SPNAME;
             RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_About_Us.ip_usr_customer_number, Value = CompanyId, Direction = 1 });
-            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_About_Us.ip_about_us, Value = SubCompanyId, Direction = 1 });
-            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_About_Us.@ip_user_id, Value = UserId, Direction = 1 });
+            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_About_Us.ip_user_id, Value = UserId, Direction = 1 });
+            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_About_Us.ip_about_us, Value = AboutUsInfo, Direction = 1 });
             return CreateRequest();
         }
 

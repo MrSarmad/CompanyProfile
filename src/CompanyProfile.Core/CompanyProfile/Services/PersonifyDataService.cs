@@ -36,7 +36,7 @@ namespace CompanyProfile.Core.CompanyProfile
             }
         }
 
-        public async Task<string> MakeRequest<T>(StoredProcedureRequest req)
+        public async Task<string> MakeRequest(StoredProcedureRequest req)
         {
             try
             {

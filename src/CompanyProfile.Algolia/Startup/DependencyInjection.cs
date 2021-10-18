@@ -25,7 +25,6 @@ namespace CompanyProfile.Algolia.Startup
             AddIndexOperationStrategies(services);
             RegisterIndexCreation(services);
             RegisterSeeding(services);
-            RegisterCompanyProfile(services);
         }
 
         private static void RegisterSearchProviders(IServiceCollection services)
@@ -51,11 +50,6 @@ namespace CompanyProfile.Algolia.Startup
             services.AddScoped<ISeeder, MyEntitySeeder>();
 
             services.AddScoped<SeederProvider>();
-        }
-
-        private static void RegisterCompanyProfile(IServiceCollection services)
-        {
-            services.AddScoped<ICompanyProfileService, CompanyProfileService>();
         }
     }
 }

@@ -8,19 +8,18 @@ namespace CompanyProfile.Core.CompanyProfile
 {
     public class GeneralInfoProcedureRequest : ProcedureRequestBase
     {
-        public GeneralInfoProcedureRequest(string asiNumber, string subCompanyId, string userId)
+        public GeneralInfoProcedureRequest(string companyId, string userId)
         {
-            CompanyId = GetAsiNumber(asiNumber);
-            SubCompanyId = subCompanyId;
+            CompanyId = companyId;
             UserId = userId;
+            RequestParams = new List<StoredProcedureRequestParameter>();
         }
 
         public override StoredProcedureRequest CreateSelectProcedureRequest()
         {
             SPName = ProceduresInfo.USR_CPI_General_Select.SPNAME;
-            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Select.@ip_master_customer_id, Value = CompanyId, Direction = 1 });
-            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Select.@ip_sub_customer_id, Value = SubCompanyId, Direction = 1 });
-            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Select.@ip_user_id, Value = UserId, Direction = 1 });
+            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Select.ip_usr_customer_number, Value = CompanyId, Direction = 1 });
+            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Select.ip_user_id, Value = UserId, Direction = 1 });
             return CreateRequest();
         }
 

@@ -1,5 +1,4 @@
 ﻿using ASI.Contracts.CompanyProfile.CompanyProfile.XMLModel;
-
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,7 +8,7 @@ namespace CompanyProfile.Core.CompanyProfile
 {
     public interface ICompanyProfileService
     {
-        public Task<CompanyGeneralInfo> GetCompanyInfo(string asiNumber, string subCompanyId, string userId);
+        public Task<CompanyGeneralInfo> GetCompanyInfo(string asiNumber, string userId);
         Task<bool> UpdateAboutUs(string asiNumber, string aboutUs, string userId);
         Task<bool> UpdateBusinessHours(string asiNumber, string businessHours, string userId);
         Task<bool> UpdateMinorityOwned(string asiNumber, char femaleOwned, char veteranOwned, char asianOwned,

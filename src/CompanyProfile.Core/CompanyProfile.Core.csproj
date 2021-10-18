@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="CompanyProfile\PersonifyRequest.cs" />
     <Compile Remove="CompanyProfile\SPBuilders\AddressInfoRequestProcessor.cs" />
     <Compile Remove="CompanyProfile\SPBuilders\GeneralInfoRequestProcessor.cs" />
   </ItemGroup>

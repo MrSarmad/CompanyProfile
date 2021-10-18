@@ -10,7 +10,6 @@ namespace CompanyProfile.Core.CompanyProfile
     {
         public string SPName { get; set; }
         public string CompanyId { get; set; }
-        public string SubCompanyId { get; set; }
         public string UserId { get; set; }
         protected List<StoredProcedureRequestParameter> RequestParams { get; set; }
 

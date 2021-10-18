@@ -31,7 +31,7 @@ namespace CompanyProfile.Core.CompanyProfile
             SPName = ProceduresInfo.USR_CPI_General_Update_Business_Hours.SPNAME;
             RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Business_Hours.ip_usr_customer_number, Value = CompanyId, Direction = 1 });
             RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Business_Hours.ip_business_hours, Value = BusinessHours, Direction = 1 });
-            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Business_Hours.@ip_user_id, Value = UserId, Direction = 1 });
+            RequestParams.Add(new StoredProcedureRequestParameter { Name = ProceduresInfo.USR_CPI_General_Update_Business_Hours.ip_user_id, Value = UserId, Direction = 1 });
             return CreateRequest();
         }
 

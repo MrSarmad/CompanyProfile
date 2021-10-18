@@ -46,8 +46,8 @@ namespace CompanyProfile.Personify.ExampleConsole
             var procParams = new Dictionary<string, string>();
             var currentUserName = GetCurrentUserName();
 
-            procParams.Add("@ip_master_customer_id", asiNumber.PadLeft(12, '0'));//why is this padded with zeros? 
-            procParams.Add("@ip_sub_customer_id", "0"); //what does this mean? 
+            procParams.Add("@ip_usr_customer_number", "9207"); //.PadLeft(12, '0'));//why is this padded with zeros? 
+            //procParams.Add("@ip_sub_customer_id", "0"); //what does this mean? 
             procParams.Add("@ip_user_id", currentUserName);
 
             var psfyRequest = GetProcRequest(procName, procParams);

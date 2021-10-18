@@ -14,23 +14,23 @@ namespace CompanyProfile.Web.Api.Controllers
     {
         private readonly ICompanyProfileService _service;
 
-        public CompanyProfileController(CompanyProfileService service)
+        public CompanyProfileController(ICompanyProfileService service)
         {
             _service = service ?? throw new ArgumentNullException(nameof(service));
         }
 
         [HttpGet]
         [Route("GeneralInfo")]
-        public async Task<CompanyGeneralInfo> GetGeneralInfo(string asiNumber)
+        public async Task<CompanyGeneralInfo> GetGeneralInfo(string companyId)
         {
-            return await _service.GetCompanyInfo(asiNumber, "0", GetCurrentUserName());
+            return await _service.GetCompanyInfo(companyId, GetCurrentUserName());
         }
 
         [HttpPut]
         [Route("UpdateAboutUs")]
-        public async Task<bool> UpdateAboutUs(string asiNumber, string aboutUs, string userId)
+        public async Task<bool> UpdateAboutUs(string companyId, string aboutUs)
         {
-            return await _service.UpdateAboutUs(asiNumber, aboutUs, userId);
+            return await _service.UpdateAboutUs(companyId, aboutUs, GetCurrentUserName());
         }
 
         [HttpPut]
