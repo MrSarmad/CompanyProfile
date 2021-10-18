@@ -20,10 +20,10 @@ namespace ASI.Contracts.CompanyProfile.CompanyProfile.XMLModel
         public object Advertising_Specialty_Sales_Volume { get; set; }
         /// <remarks/>
         public string Number_Of_Employees { get; set; }
-        /// <remarks/>
-        public object About_Us { get; set; }
-        /// <remarks/>
-        public object Female_Owned { get; set; }
+        /// <remarks/>        
+        public string About_Us { get; set; }
+        /// <remarks/>        
+        public string Female_Owned { get; set; }
         /// <remarks/>
         public object Veteran_Owned { get; set; }
         /// <remarks/>

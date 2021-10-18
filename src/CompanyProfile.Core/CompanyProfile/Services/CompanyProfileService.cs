@@ -20,15 +20,15 @@ namespace CompanyProfile.Core.CompanyProfile
         {
             IProcedureRequest spRequestBuilder = new GeneralInfoProcedureRequest(companyId, userId);         
             var pfyService = new PersonifyDataService(_httpClient);
-            var response = await pfyService.MakeRequest(spRequestBuilder.CreateSelectProcedureRequest());
-            return null;           
+            var response = await pfyService.MakeRequest<PsfyGeneralInfoContainer>(spRequestBuilder.CreateSelectProcedureRequest());
+            return response.Table;           
         }
 
         public async Task<bool> UpdateAboutUs(string companyId, string aboutUs, string userId)
         {
             IProcedureRequest spRequestBuilder = new GeneralInfoAboutUsProcedureRequest(companyId, aboutUs, userId);
             var pfyService = new PersonifyDataService(_httpClient);
-            var response = await pfyService.MakeRequest(spRequestBuilder.CreateUpdateProcedureRequest());
+            //var response = await pfyService.MakeRequest(spRequestBuilder.CreateUpdateProcedureRequest());
             return true;           
         }
 
@@ -36,7 +36,7 @@ namespace CompanyProfile.Core.CompanyProfile
         {
             IProcedureRequest spRequestBuilder = new GeneralInfoBusinessHoursProcedureRequest(asiNumber, businessHours, userId);
             var pfyService = new PersonifyDataService(_httpClient);
-            var response = await pfyService.MakeRequest(spRequestBuilder.CreateUpdateProcedureRequest());
+            //var response = await pfyService.MakeRequest(spRequestBuilder.CreateUpdateProcedureRequest());
             return true;
         }
 
@@ -48,7 +48,7 @@ namespace CompanyProfile.Core.CompanyProfile
                 hispanic_owned, african_american_owned, native_american_owned, jewish_owned, disabled_owned, esop,
                 cert_available, small_disadvantage, lgbtq_owned, user_id);
             var pfyService = new PersonifyDataService(_httpClient);
-            var response = await pfyService.MakeRequest(spRequestBuilder.CreateUpdateProcedureRequest());
+            //var response = await pfyService.MakeRequest(spRequestBuilder.CreateUpdateProcedureRequest());
             return true;
         }
 
@@ -56,7 +56,7 @@ namespace CompanyProfile.Core.CompanyProfile
         {
             IProcedureRequest spRequestBuilder = new GeneralInfoNumberOfEmployeesProcedureRequest(asiNumber, Number_Of_Employees, userId);
             var pfyService = new PersonifyDataService(_httpClient);
-            var response = await pfyService.MakeRequest(spRequestBuilder.CreateUpdateProcedureRequest());
+            //var response = await pfyService.MakeRequest(spRequestBuilder.CreateUpdateProcedureRequest());
             return true;
         }
 
@@ -64,7 +64,7 @@ namespace CompanyProfile.Core.CompanyProfile
         {
             IProcedureRequest spRequestBuilder = new GeneralInfoYearEstablishedProcedureRequest(asiNumber, year_established, userId);
             var pfyService = new PersonifyDataService(_httpClient);
-            var response = await pfyService.MakeRequest(spRequestBuilder.CreateUpdateProcedureRequest());
+            //var response = await pfyService.MakeRequest(spRequestBuilder.CreateUpdateProcedureRequest());
             return true;
         }        
     }

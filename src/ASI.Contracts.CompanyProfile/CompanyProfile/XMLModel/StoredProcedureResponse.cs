@@ -5,6 +5,17 @@ using System.Xml.Serialization;
 
 namespace ASI.Contracts.CompanyProfile.CompanyProfile.XMLModel
 {
+    /// <remarks/>
+    [Serializable()]
+    [System.ComponentModel.DesignerCategory("code")]
+    [XmlType(AnonymousType = true)]
+    [XmlRoot(ElementName = "NewDataSet", Namespace = "", IsNullable = false)]
+    public partial class PsfyGeneralInfoContainer
+    {
+        /// <remarks/>
+        public CompanyGeneralInfo Table { get; set; }
+    }
+
     [Serializable()]
     [System.ComponentModel.DesignerCategory("code")]
     [XmlType(AnonymousType = true)]
