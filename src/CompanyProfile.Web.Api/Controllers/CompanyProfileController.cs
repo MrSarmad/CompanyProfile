@@ -1,4 +1,5 @@
-﻿using ASI.Contracts.CompanyProfile.CompanyProfile.XMLModel;
+﻿using ASI.Contracts.CompanyProfile.CompanyProfile.DTO;
+using ASI.Contracts.CompanyProfile.CompanyProfile.XMLModel;
 using CompanyProfile.Core.CompanyProfile;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,55 +24,45 @@ namespace CompanyProfile.Web.Api.Controllers
         [Route("GeneralInfo")]
         public async Task<CompanyGeneralInfo> GetGeneralInfo(string companyId)
         {
-            return await _service.GetCompanyInfo(companyId, GetCurrentUserName());
+            var companyInfo = new DTOBase { CompanyId = companyId };
+            return await _service.GetCompanyInfo(companyInfo);
         }
 
         [HttpPut]
         [Route("UpdateAboutUs")]
-        public async Task<bool> UpdateAboutUs(string companyId, string aboutUs)
+        public async Task<bool> UpdateAboutUs(AboutUsDTO dto)
         {
-            return await _service.UpdateAboutUs(companyId, aboutUs, GetCurrentUserName());
+            return await _service.UpdateAboutUs(dto);
         }
 
         [HttpPut]
         [Route("UpdateBusinessHours")]
-        public async Task<bool> UpdateBusinessHours(string asiNumber, string businessHours, string userId)
+        public async Task<bool> UpdateBusinessHours(BusinessHoursDTO dto)
         {           
-            return await _service.UpdateBusinessHours(asiNumber, businessHours, userId);
+            return await _service.UpdateBusinessHours(dto);
         }
-
-
 
         [HttpPut]
         [Route("UpdateMinorityOwned")]
-        public async Task<bool> UpdateMinorityOwned(string asiNumber, char femaleOwned, char veteranOwned, char asianOwned,
-            char hispanic_owned, char african_american_owned, char native_american_owned, char jewish_owned, char disabled_owned,
-            char esop, char cert_available, char small_disadvantage, char lgbtq_owned, string user_id)
+        public async Task<bool> UpdateMinorityOwned(MinorityOwnedDTO dto)
         {            
-            return await _service.UpdateMinorityOwned(asiNumber, femaleOwned, veteranOwned, asianOwned,
-            hispanic_owned, african_american_owned,  native_american_owned, jewish_owned, disabled_owned,
-            esop, cert_available, small_disadvantage, lgbtq_owned, user_id);
+            return await _service.UpdateMinorityOwned(dto);
         }
 
 
         [HttpPut]
         [Route("UpdateNumberOfEmployees")]
-        public async Task<bool> UpdateNumberOfEmployees(string asiNumber, string Number_Of_Employees, string userId)
+        public async Task<bool> UpdateNumberOfEmployees(NumberOfEmployeesDTO dto)
         {
-            return await _service.UpdateNumberOfEmployees(asiNumber, Number_Of_Employees, userId);
+            return await _service.UpdateNumberOfEmployees(dto);
         }
 
 
         [HttpPut]
         [Route("UpdateUpdateYearEstablished")]
-        public async Task<bool> UpdateUpdateYearEstablished(string asiNumber, string year_established, string userId)
+        public async Task<bool> UpdateUpdateYearEstablished(YearEstablishedDTO dto)
         {
-            return await _service.UpdateUpdateYearEstablished(asiNumber, year_established, userId);
-        }
-
-        private string GetCurrentUserName()
-        {
-            return "CURWILER";
-        }
+            return await _service.UpdateUpdateYearEstablished(dto);
+        }       
     }
 }

@@ -1,4 +1,5 @@
-﻿using ASI.Contracts.CompanyProfile.CompanyProfile.XMLModel;
+﻿using ASI.Contracts.CompanyProfile.CompanyProfile.DTO;
+using ASI.Contracts.CompanyProfile.CompanyProfile.XMLModel;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -16,53 +17,51 @@ namespace CompanyProfile.Core.CompanyProfile
             _httpClient = new HttpClient();
         }        
 
-        public async Task<CompanyGeneralInfo> GetCompanyInfo(string companyId, string userId)
+        public async Task<CompanyGeneralInfo> GetCompanyInfo(DTOBase dto)
         {
-            IProcedureRequest spRequestBuilder = new GeneralInfoProcedureRequest(companyId, userId);         
+            IProcedureRequest spRequestBuilder = new GeneralInfoProcedureRequest(dto.CompanyId, dto.UserId);         
             var pfyService = new PersonifyDataService(_httpClient);
             var response = await pfyService.MakeRequest<PsfyGeneralInfoContainer>(spRequestBuilder.CreateSelectProcedureRequest());
             return response.Table;           
         }
 
-        public async Task<bool> UpdateAboutUs(string companyId, string aboutUs, string userId)
+        public async Task<bool> UpdateAboutUs(AboutUsDTO dto)
         {
-            IProcedureRequest spRequestBuilder = new GeneralInfoAboutUsProcedureRequest(companyId, aboutUs, userId);
+            IProcedureRequest spRequestBuilder = new GeneralInfoAboutUsProcedureRequest(dto.CompanyId, dto.AboutUs, dto.UserId);
             var pfyService = new PersonifyDataService(_httpClient);
             //var response = await pfyService.MakeRequest(spRequestBuilder.CreateUpdateProcedureRequest());
             return true;           
         }
 
-        public async Task<bool> UpdateBusinessHours(string asiNumber, string businessHours, string userId)
+        public async Task<bool> UpdateBusinessHours(BusinessHoursDTO dto)
         {
-            IProcedureRequest spRequestBuilder = new GeneralInfoBusinessHoursProcedureRequest(asiNumber, businessHours, userId);
+            IProcedureRequest spRequestBuilder = new GeneralInfoBusinessHoursProcedureRequest(dto.CompanyId, dto.BusinessHours, dto.UserId);
             var pfyService = new PersonifyDataService(_httpClient);
             //var response = await pfyService.MakeRequest(spRequestBuilder.CreateUpdateProcedureRequest());
             return true;
         }
 
-        public async Task<bool> UpdateMinorityOwned(string asiNumber, char femaleOwned, char veteranOwned, char asianOwned, char hispanic_owned,
-            char african_american_owned, char native_american_owned, char jewish_owned, char disabled_owned, char esop, char cert_available,
-            char small_disadvantage, char lgbtq_owned, string user_id)
+        public async Task<bool> UpdateMinorityOwned(MinorityOwnedDTO dto)
         {
-            IProcedureRequest spRequestBuilder = new GeneralInfoMinorityOwnedProcedureRequest(asiNumber, femaleOwned, veteranOwned, asianOwned,
-                hispanic_owned, african_american_owned, native_american_owned, jewish_owned, disabled_owned, esop,
-                cert_available, small_disadvantage, lgbtq_owned, user_id);
+            IProcedureRequest spRequestBuilder = new GeneralInfoMinorityOwnedProcedureRequest(dto.CompanyId, dto.FemaleOwned, dto.VeteranOwned, dto.AsianOwned,
+                dto.HispanicOwned, dto.AfricanAmericanOwned, dto.NativeAmericanOwned, dto.JewishOwned, dto.DisabledOwned, dto.Esop,
+                dto.CertAvailable, dto.SmallDisadvantage, dto.LgbtqOwned, dto.UserId);
             var pfyService = new PersonifyDataService(_httpClient);
             //var response = await pfyService.MakeRequest(spRequestBuilder.CreateUpdateProcedureRequest());
             return true;
         }
 
-        public async Task<bool> UpdateNumberOfEmployees(string asiNumber, string Number_Of_Employees, string userId)
+        public async Task<bool> UpdateNumberOfEmployees(NumberOfEmployeesDTO dto)
         {
-            IProcedureRequest spRequestBuilder = new GeneralInfoNumberOfEmployeesProcedureRequest(asiNumber, Number_Of_Employees, userId);
+            IProcedureRequest spRequestBuilder = new GeneralInfoNumberOfEmployeesProcedureRequest(dto.CompanyId, dto.Number_Of_Employees, dto.UserId);
             var pfyService = new PersonifyDataService(_httpClient);
             //var response = await pfyService.MakeRequest(spRequestBuilder.CreateUpdateProcedureRequest());
             return true;
         }
 
-        public async Task<bool> UpdateUpdateYearEstablished(string asiNumber, string year_established, string userId)
+        public async Task<bool> UpdateUpdateYearEstablished(YearEstablishedDTO dto)
         {
-            IProcedureRequest spRequestBuilder = new GeneralInfoYearEstablishedProcedureRequest(asiNumber, year_established, userId);
+            IProcedureRequest spRequestBuilder = new GeneralInfoYearEstablishedProcedureRequest(dto.CompanyId, dto.YearEstablished, dto.UserId);
             var pfyService = new PersonifyDataService(_httpClient);
             //var response = await pfyService.MakeRequest(spRequestBuilder.CreateUpdateProcedureRequest());
             return true;

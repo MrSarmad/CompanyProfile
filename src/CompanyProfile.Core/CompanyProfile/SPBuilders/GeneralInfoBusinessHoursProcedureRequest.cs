@@ -6,6 +6,17 @@ using System.Text;
 
 namespace CompanyProfile.Core.CompanyProfile
 {
+    public partial class ProceduresInfo
+    {
+        public class USR_CPI_General_Update_Business_Hours
+        {
+            public const string SPNAME = "USR_CPI_General_Update_Business_Hours ";
+            public const string ip_usr_customer_number = "@ip_usr_customer_number";
+            public const string ip_business_hours = "@ip_business_hours";
+            public const string ip_user_id = "@ip_user_id";
+        }
+    }
+
     public class GeneralInfoBusinessHoursProcedureRequest : ProcedureRequestBase
     {
         private string BusinessHours { get; set; }

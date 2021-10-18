@@ -6,6 +6,17 @@ using System.Text;
 
 namespace CompanyProfile.Core.CompanyProfile
 {
+    public partial class ProceduresInfo
+    {
+        public class USR_CPI_General_Update_About_Us
+        {
+            public const string SPNAME = "USR_CPI_General_Update_About_Us ";
+            public const string ip_usr_customer_number = "@ip_usr_customer_number";
+            public const string ip_about_us = "@ip_about_us";
+            public const string ip_user_id = "@ip_user_id";
+        }
+    }
+
     public class GeneralInfoAboutUsProcedureRequest : ProcedureRequestBase
     {
         public string AboutUsInfo { get; set; }
