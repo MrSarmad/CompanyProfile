@@ -49,43 +49,39 @@ namespace CompanyProfile.Core.CompanyProfile
 
             //var xmlSvc = new XmlService();
             var serializedXml = XmlHelper.Serialize(req);
-
             var psfyPostResponse = await httpClient.PostAsync("", new StringContent(serializedXml, Encoding.UTF8, "text/xml"));
-
             var psfyResponseContent = await psfyPostResponse.Content.ReadAsStringAsync();
 
-            //serialize to standard result object
-            StoredProcedureResponse output;
-            var xmlSerializer = new XmlSerializer(typeof(StoredProcedureResponse), new XmlRootAttribute("StoredProcedureOutput"));
-            using (TextReader reader = new StringReader(psfyResponseContent))
-            {
-                output = (StoredProcedureResponse)xmlSerializer.Deserialize(reader);
-            }
             try
             {
-                var xmlDoc = new XmlDocument();
-                var dataNode = string.Empty;
-                xmlDoc.LoadXml(output.Data);
-                using (var writer = new StringWriter())
+                //serialize to standard response object
+                var output = XmlHelper.Deserialize<StoredProcedureResponse>(psfyResponseContent, "StoredProcedureOutput");
+                if (output != null && output is StoredProcedureResponse)
                 {
-                    xmlDoc.Save(writer);
-
-                    dataNode = writer.ToString();
-                }
-
-                if (!string.IsNullOrWhiteSpace(dataNode))
-                {
-                    //deserialize the datanode into provided type
-                    using TextReader reader = new StringReader(dataNode);
-                    var dataNodeSerializer = new XmlSerializer(typeof(T), new XmlRootAttribute("NewDataSet"));
-                    var datanodeObj = dataNodeSerializer.Deserialize(reader);
-                    if (datanodeObj is T)
-                        return (T)datanodeObj;
+                    var obj = (StoredProcedureResponse)output;
+                    var dataNode = XmlHelper.ConvertToXML(obj.Data);
+                    if (!string.IsNullOrWhiteSpace(dataNode))
+                    {
+                        var dataContainerObject = XmlHelper.Deserialize<StoredProcedureResponseContainer>(dataNode, "NewDataSet");
+                        if (dataContainerObject != null && dataContainerObject is StoredProcedureResponseContainer)
+                        {
+                            var container = (StoredProcedureResponseContainer)dataContainerObject;
+                            if (container.Table != null)
+                            {
+                                var dataTable = XmlHelper.Serialize<object>(container.Table, "Table");
+                                var tableXML = XmlHelper.ConvertToXML(dataTable);
+                                var response = XmlHelper.Deserialize<T>(tableXML, "Table");
+                                if (response is T)
+                                    return (T)response;
+                            }
+                        }
+                    }
                 }
             }
             catch (Exception ex)
             {
-                return null;
+                throw ex;
+                //return null;
             }
             return null;
         }

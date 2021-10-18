@@ -10,18 +10,20 @@ namespace ASI.Contracts.CompanyProfile.CompanyProfile.XMLModel
     [System.ComponentModel.DesignerCategory("code")]
     [XmlType(AnonymousType = true)]
     [XmlRoot(ElementName = "NewDataSet", Namespace = "", IsNullable = false)]
-    public partial class PsfyGeneralInfoContainer
+    public partial class StoredProcedureResponseContainer
     {
         /// <remarks/>
-        public CompanyGeneralInfo Table { get; set; }
+        [XmlElement(ElementName = "Table", Namespace = "")]
+        public object Table { get; set; }
     }
 
     [Serializable()]
     [System.ComponentModel.DesignerCategory("code")]
     [XmlType(AnonymousType = true)]
     [XmlRoot(Namespace = "", IsNullable = false)]
-    public class StoredProcedureResponse
+    public partial class StoredProcedureResponse
     {
+        [XmlElement("Data")]
         public string Data { get; set; }
         /// <remarks/>
         [XmlElement(IsNullable = true)]

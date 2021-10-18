@@ -8,7 +8,7 @@ namespace ASI.Contracts.CompanyProfile.CompanyProfile.DTO
     public class DTOBase
     {
         public string CompanyId {get; set;}
-        public string UserId { get; set; }
-        public string UserName { get; set; } = "CURWILER";
+        public string UserId { get; set; } = "CURWILER";
+        public string UserName { get; set; }
     }
 }

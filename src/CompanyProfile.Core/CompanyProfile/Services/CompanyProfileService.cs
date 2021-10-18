@@ -21,8 +21,8 @@ namespace CompanyProfile.Core.CompanyProfile
         {
             IProcedureRequest spRequestBuilder = new GeneralInfoProcedureRequest(dto.CompanyId, dto.UserId);         
             var pfyService = new PersonifyDataService(_httpClient);
-            var response = await pfyService.MakeRequest<PsfyGeneralInfoContainer>(spRequestBuilder.CreateSelectProcedureRequest());
-            return response.Table;           
+            var response = await pfyService.MakeRequest<CompanyGeneralInfo>(spRequestBuilder.CreateSelectProcedureRequest());
+            return response;
         }
 
         public async Task<bool> UpdateAboutUs(AboutUsDTO dto)
