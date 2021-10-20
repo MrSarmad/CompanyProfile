@@ -29,7 +29,7 @@ namespace CompanyProfile.Core.MyEntities
             //    .Where(x => x.Id == id)
             //    .FirstOrDefault();
 
-            var response =  _apiAccess.GetBasicInfo().Result;
+            var response = string.Empty; // _apiAccess.GetBasicInfo().Result;
 
             return new MyEntity {
                 Description = response

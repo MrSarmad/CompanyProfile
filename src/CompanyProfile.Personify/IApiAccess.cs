@@ -1,9 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using ASI.Contracts.CompanyProfile.CompanyProfile.XMLModel;
+
+using System.Threading.Tasks;
 
 namespace CompanyProfile.Personify
 {
     public interface IApiAccess
     {
-        Task<string> GetBasicInfo();
+        Task<CompanyGeneralInfo> GetGeneralInfo(StoredProcedureRequest req);
     }
 }

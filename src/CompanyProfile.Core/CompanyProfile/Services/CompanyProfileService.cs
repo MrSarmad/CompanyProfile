@@ -1,5 +1,8 @@
 ﻿using ASI.Contracts.CompanyProfile.CompanyProfile.DTO;
 using ASI.Contracts.CompanyProfile.CompanyProfile.XMLModel;
+
+using CompanyProfile.Personify;
+
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -11,17 +14,20 @@ namespace CompanyProfile.Core.CompanyProfile
     public class CompanyProfileService : ICompanyProfileService
     {
         private readonly HttpClient _httpClient;
-         
-        public CompanyProfileService()
+        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly IApiAccess _pfyService;
+
+        public CompanyProfileService(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = new HttpClient();
+            _httpClientFactory = httpClientFactory ?? throw new ArgumentNullException(nameof(httpClientFactory));
+            _pfyService = new ApiAccess(httpClientFactory);
         }        
 
         public async Task<CompanyGeneralInfo> GetCompanyInfo(DTOBase dto)
         {
-            IProcedureRequest spRequestBuilder = new GeneralInfoProcedureRequest(dto.CompanyId, dto.UserId);         
-            var pfyService = new PersonifyDataService(_httpClient);
-            var response = await pfyService.MakeRequest<CompanyGeneralInfo>(spRequestBuilder.CreateSelectProcedureRequest());
+            IProcedureRequest spRequestBuilder = new GeneralInfoProcedureRequest(dto.CompanyId, dto.UserId);
+            var request = spRequestBuilder.CreateSelectProcedureRequest();
+            var response = await _pfyService.GetGeneralInfo(request);
             return response;
         }
 
