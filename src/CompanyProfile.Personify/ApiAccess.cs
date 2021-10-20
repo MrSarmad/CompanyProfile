@@ -50,6 +50,18 @@ namespace CompanyProfile.Personify
             return retVal;
         }
 
+        public async Task<bool> UpdateAboutUs(StoredProcedureRequest req)
+        {
+            var retVal = false;
+            if (req != null)
+            {
+                var success = await UpdatePersonify(req);
+                if (success is ErrorInfo && success.ErrorNumber == 0)
+                    retVal = true;
+            }
+            return retVal;
+        }
+
         private async Task<T> GetFromPersonify<T>(StoredProcedureRequest req) where T : class
         {
             var serializedXml = XmlHelper.Serialize(req);
@@ -76,6 +88,45 @@ namespace CompanyProfile.Personify
                                 var response = XmlHelper.Deserialize<T>(tableXML, "Table");
                                 if (response is T)
                                     return (T)response;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+                //return null;
+            }
+            return null;
+        }
+
+        private async Task<ErrorInfo> UpdatePersonify(StoredProcedureRequest req)
+        {
+            var serializedXml = XmlHelper.Serialize(req);
+            var psfyPostResponse = await _httpClient.PostAsync("", new StringContent(serializedXml, Encoding.UTF8, "text/xml"));
+            var psfyResponseContent = await psfyPostResponse.Content.ReadAsStringAsync();
+
+            try
+            {
+                var output = XmlHelper.Deserialize<StoredProcedureResponse>(psfyResponseContent, "StoredProcedureOutput");
+                if (output != null && output is StoredProcedureResponse)
+                {
+                    var obj = (StoredProcedureResponse)output;
+                    var dataNode = XmlHelper.ConvertToXML(obj.Data);
+                    if (!string.IsNullOrWhiteSpace(dataNode))
+                    {
+                        var dataContainerObject = XmlHelper.Deserialize<StoredProcedureResponseContainer>(dataNode, "NewDataSet");
+                        if (dataContainerObject != null && dataContainerObject is StoredProcedureResponseContainer)
+                        {
+                            var container = (StoredProcedureResponseContainer)dataContainerObject;
+                            if (container.Table != null)
+                            {
+                                var dataTable = XmlHelper.Serialize<object>(container.Table, "Table");
+                                var tableXML = XmlHelper.ConvertToXML(dataTable);
+                                var response = XmlHelper.Deserialize<ErrorInfo>(tableXML, "Table");
+                                if (response is ErrorInfo)
+                                    return (ErrorInfo)response;
                             }
                         }
                     }

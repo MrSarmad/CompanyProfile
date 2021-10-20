@@ -34,9 +34,9 @@ namespace CompanyProfile.Core.CompanyProfile
         public async Task<bool> UpdateAboutUs(AboutUsDTO dto)
         {
             IProcedureRequest spRequestBuilder = new GeneralInfoAboutUsProcedureRequest(dto.CompanyId, dto.AboutUs, dto.UserId);
-            var pfyService = new PersonifyDataService(_httpClient);
-            //var response = await pfyService.MakeRequest(spRequestBuilder.CreateUpdateProcedureRequest());
-            return true;           
+            var request = spRequestBuilder.CreateUpdateProcedureRequest();
+            var response = await _pfyService.UpdateAboutUs(request);
+            return response;           
         }
 
         public async Task<bool> UpdateBusinessHours(BusinessHoursDTO dto)
